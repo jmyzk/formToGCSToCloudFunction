@@ -24,7 +24,7 @@ def hello_gcs_generic(data, context):
     
     temp_local_filename = tempfile.mkstemp()
     storage_client = storage.Client()    
-    bucket_name = data['bucket'])    
+    bucket_name = data['bucket'] 
     bucket = storage_client.bucket(bucket_name)
     
     file = data['name']
