@@ -27,6 +27,6 @@ def hello_gcs_generic(data, context):
     bucket_name = data['bucket'])    
     bucket = storage_client.bucket(bucket_name)
     
-    file = data['name'])  
+    file = data['name']
     blob = bucket.blob(file)
     blob.download_to_filename(temp_local_filename)
