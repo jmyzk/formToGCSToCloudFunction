@@ -8,6 +8,8 @@ def hello_gcs_generic(data, context):
     Returns:
         None; the output is written to Stackdriver Logging
     """
+    from google.cloud import storage
+    storage_client = storage.Client()
 
     print('Event ID: {}'.format(context.event_id))
     print('Event type: {}'.format(context.event_type))
@@ -16,4 +18,16 @@ def hello_gcs_generic(data, context):
     print('Metageneration: {}'.format(data['metageneration']))
     print('Created: {}'.format(data['timeCreated']))
     print('Updated: {}'.format(data['updated']))
+    
+    # save uploaded file to local /tmp
+    bucket = data['bucket']
+    file = data['name']
+    _, temp_local_filename = tempfile.mkstemp()
+    blob = bucket.blob(file)
+    blob.download_to_filename(temp_local_filename)
+    print(
+    "Blob {} downloaded to {}.".format(
+        file, temp_local_filename
+    ))
+    
 
