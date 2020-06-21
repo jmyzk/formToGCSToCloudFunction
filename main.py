@@ -18,7 +18,10 @@ def hello_gcs_generic(data, context):
     print('Created: {}'.format(data['timeCreated']))
     print('Updated: {}'.format(data['updated']))
     
-    gcs_file = gcs.open(filename)
+    bucket = data['bucket']
+    filename = data['name']
+    filepath = os.path.join(bucket,filename )
+    gcs_file = gcs.open(filepath)
     contents = gcs_file.read()
     gcs_file.close()
     print(contents)
