@@ -12,7 +12,7 @@ def hello_gcs_generic(data, context):
     storage_client = storage.Client()
     bucket = storage_client.get_bucket('apps-script-jpos-store')
     blob = bucket.blob('february.xlsx')
-    blob.download_to_filename('february.xlsx)
+    blob.download_to_filename('february.xlsx')
     print('Event ID: {}'.format(context.event_id))
     print('Event type: {}'.format(context.event_type))
     print('Bucket: {}'.format(data['bucket']))
