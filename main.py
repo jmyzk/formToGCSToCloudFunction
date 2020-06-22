@@ -20,7 +20,7 @@ def hello_gcs_generic(data, context):
     
     from google.cloud import storage
     client = storage.Client()
-    clent.bucket('test_bucket')
+
 
     
 
