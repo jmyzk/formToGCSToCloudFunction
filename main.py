@@ -8,7 +8,9 @@ def hello_gcs_generic(data, context):
     Returns:
         None; the output is written to Stackdriver Logging
     """
-    from google.cloud import storage as gcs
+    from google.cloud import storage
+    from google.cloud import storage
+    client = storage.Client()
 
     print('Event ID: {}'.format(context.event_id))
     print('Event type: {}'.format(context.event_type))
@@ -21,9 +23,13 @@ def hello_gcs_generic(data, context):
     bucket = data['bucket']
     filename = data['name']
     filepath = os.path.join(bucket,filename )
-    gcs_file = gcs.open(filepath)
-    contents = gcs_file.read()
-    gcs_file.close()
-    print(contents)
+    # Then do other things...
+    blob = bucket.get_blob(filepath)
+    print(blob.download_as_string())
+    blob.upload_from_string('New contents!')
+    filepath = os.path.join(bucket,'storage.txt' )
+    blob2 = bucket.blob(filepath)
+    #blob2.upload_from_filename(filename='/local/path.txt')
+
     
 
